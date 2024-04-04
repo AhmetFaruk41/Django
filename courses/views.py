@@ -1,24 +1,63 @@
+from datetime import date
 from django.http import HttpResponse, HttpResponseNotFound,HttpResponseRedirect
 from django.shortcuts import redirect,render
 from django.urls import reverse
+
 data = {
     "programlama":"programlama kategorisine ait kurslar",
     "web-geliştirme":"web geliştirme kategorisine ait kurslarr",
     "mobil":"mobil kategorisine ait kurslar",
 }
+db ={
+    "courses":[
+        {
+            "title":"javascript kursu",
+            "description":"javascript kurs açıklaması",
+            "imageUrl":"https://img-c.udemycdn.com/course/750x422/1662526_fc1c_3.jpg",
+            "slug":"javscript-kursu",
+            "date": date(2022,10,10),
+            "isActive":True
+        },
+        {
+            "title":"python kursu",
+            "description":"python kurs açıklaması",
+            "imageUrl":"https://img-c.udemycdn.com/course/750x422/2463492_8344_3.jpg",
+            "slug":"python-kursu",
+            "date": date(2022,9,10),
+            "isActive":False
+        },
+        {
+            "title":"web geliştirme kursu",
+            "description":"web geliştirme kurs açıklaması",
+            "imageUrl":"https://img-c.udemycdn.com/course/750x422/1258436_2dc3_4.jpg",
+            "slug":"web-gelistirme-kursu",
+            "date": date(2022,8,10),
+            "isActive":True
+        }
+    ],
+    "categories":[
+                  {"id":1,"name":"programlama","slug":"programlama"},
+                  {"id":2,"name":"web geliştirme","slug":"web-gelistirme"},
+                  {"id":3,"name":"mobil uygulamalar","slug":"mobil-uygulamalar"},
+                  ]
+}
+
+# isUpdated kısmında kaldım!!!!!!!!!!!!!!!!!!!!!!!
+
 def index(request):
-    return render(request,'index.html')
+    #list comphension
+    kurslar= [course for course in db["courses"] if course["isActive"]==True]
+    kategoriler= db["categories"]
 
-def kurslar(request):
-    list_items=""
-    category_list = list(data.keys())
+    #for kurs in db["courses"]:
+    #    if kurs["isActive"] == True:
+    #        kurslar.append(kurs)
 
-    for category in category_list:
-        redirect_url = reverse('courses_by_category', args=[category])
-        list_items += f"<li><a href='{redirect_url}'>{category}</a></li>"
-    html= f"<h1>kurs listesi</h1><br><ul>{list_items}</ul>"
+    return render(request,'courses/index.html',{
+        'categories': kategoriler,
+        'courses': kurslar
+    })
 
-    return HttpResponse(html)
 
 def details(requst,kurs_adi):
     return HttpResponse(f"{kurs_adi} detay sayfası")
