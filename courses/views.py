@@ -13,7 +13,7 @@ db ={
         {
             "title":"javascript kursu",
             "description":"javascript kurs açıklaması",
-            "imageUrl":"1.jpg",
+            "imageUrl":"courses/static/courses/img/1.jpg",
             "slug":"javscript-kursu",
             "date": date(2022,10,10),
             "isActive":True,
@@ -22,7 +22,7 @@ db ={
         {
             "title":"python kursu",
             "description":"python kurs açıklaması",
-            "imageUrl":"2.jpg",
+            "imageUrl":"courses/static/courses/img/melyna-valle-LVrZdNYnsZY-unsplash.jpg",
             "slug":"python-kursu",
             "date": date(2022,9,10),
             "isActive":False,
@@ -31,7 +31,7 @@ db ={
         {
             "title":"web geliştirme kursu",
             "description":"web geliştirme kurs açıklaması",
-            "imageUrl":"3.jpg",
+            "imageUrl":"courses/static/courses/img/1.jpg",
             "slug":"web-gelistirme-kursu",
             "date": date(2022,8,10),
             "isActive":True,
